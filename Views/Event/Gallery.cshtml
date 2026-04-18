@@ -9,11 +9,25 @@
 <!-- Filtros -->
 <div class="filter-bar">
     <span class="filter-label"><i class="fas fa-filter me-1"></i>Filter:</span>
-    <button class="filter-btn active" data-sport="all">🏅 All</button>
-    <button class="filter-btn" data-sport="Football">⚽ Football</button>
-    <button class="filter-btn" data-sport="Basketball">🏀 Basketball</button>
-    <button class="filter-btn" data-sport="Swimming">🏊 Swimming</button>
-    <button class="filter-btn" data-sport="Running">🏃 Running</button>
+    <button class="filter-btn active" data-sport="all">
+        <i class="fas fa-medal"></i> All
+    </button>
+
+    <button class="filter-btn" data-sport="Football">
+        <i class="fas fa-futbol"></i> Football
+    </button>
+
+    <button class="filter-btn" data-sport="Basketball">
+        <i class="fas fa-basketball-ball"></i> Basketball
+    </button>
+
+    <button class="filter-btn" data-sport="Swimming">
+        <i class="fas fa-swimmer"></i> Swimming
+    </button>
+
+    <button class="filter-btn" data-sport="Running">
+        <i class="fas fa-running"></i> Running
+    </button>
 </div>
 
 <!-- Results count -->
@@ -25,19 +39,18 @@
 <div class="row g-4" id="eventsGrid">
 @foreach (var ev in Model)
 {
-    var emoji = ev.SportType switch {
-        "Football"   => "⚽",
-        "Basketball" => "🏀",
-        "Swimming"   => "🏊",
-        "Running"    => "🏃",
-        _            => "🏅"
+    var icon = ev.SportType switch {
+        "Football"   => "<i class='fas fa-futbol'></i>",
+        "Basketball" => "<i class='fas fa-basketball-ball'></i>",
+        "Swimming"   => "<i class='fas fa-swimmer'></i>",
+        "Running"    => "<i class='fas fa-running'></i>",
+        _            => "<i class='fas fa-medal'></i>"
     };
-
     <div class="col-sm-6 col-lg-4 col-xl-3 event-item" data-sport="@ev.SportType">
         <div class="event-card">
             <div class="card-sport-banner sport-@ev.SportType"></div>
             <div class="card-img-area">
-                <span>@emoji</span>
+                <span>@Html.Raw(icon)</span>
                 <div class="card-date-badge">
                     <i class="fas fa-calendar me-1"></i>@ev.StartDate.ToString()
                 </div>

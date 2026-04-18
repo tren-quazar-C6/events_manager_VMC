@@ -212,4 +212,4 @@
 /Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/obj/Debug/net10.0/sporting.pdb
 /Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/obj/Debug/net10.0/sporting.genruntimeconfig.cache
 /Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/obj/Debug/net10.0/ref/sporting.dll
-/Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/obj/Debug/net10.0/compressed/u0zxrup3q8-{0}-aqwg04lqho-aqwg04lqho.gz
+/Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/obj/Debug/net10.0/compressed/u0zxrup3q8-{0}-ntkfrm80yl-ntkfrm80yl.gz
