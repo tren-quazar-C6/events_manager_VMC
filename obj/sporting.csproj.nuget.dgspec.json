@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/veronicamartinez/sporting/sporting.csproj": {}
+    "/Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/sporting.csproj": {}
   },
   "projects": {
-    "/Users/veronicamartinez/sporting/sporting.csproj": {
+    "/Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/sporting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/veronicamartinez/sporting/sporting.csproj",
+        "projectUniqueName": "/Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/sporting.csproj",
         "projectName": "sporting",
-        "projectPath": "/Users/veronicamartinez/sporting/sporting.csproj",
+        "projectPath": "/Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/sporting.csproj",
         "packagesPath": "/Users/veronicamartinez/.nuget/packages/",
-        "outputPath": "/Users/veronicamartinez/sporting/obj/",
+        "outputPath": "/Users/veronicamartinez/Documents/RIWI/C#/events_manager_VMC/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/veronicamartinez/.nuget/NuGet/NuGet.Config"
