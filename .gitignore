@@ -1,8 +1,8 @@
 .idea
 
-bin
+bin/
 
-obj
+obj/
 
 .git
 
