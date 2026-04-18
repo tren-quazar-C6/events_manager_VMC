@@ -1,0 +1,76 @@
+<!-- Views/Calendar/Index.cshtml -->
+@{
+    ViewData["Title"] = "Calendar";
+}
+
+<div id="dp"></div>
+
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+    <button onclick="dp.startDate = dp.startDate.addMonths(-1); dp.update(); loadEvents();">&#8592;</button>
+    <span id="calendarTitle" style="font-size: 1.2rem; font-weight: bold;"></span>
+    <button onclick="dp.startDate = dp.startDate.addMonths(1); dp.update(); loadEvents();">&#8594;</button>
+</div>
+
+<div id="dp" style="width: 100%; height: 600px;"></div>
+
+@section Scripts {
+<script src="~/js/daypilot-all.min.js"></script>
+<script>
+    const dp = new DayPilot.Month("dp", {
+
+        onTimeRangeSelected: async (args) => {
+            const name = prompt("New event name:", "Event");
+            dp.clearSelection();
+            if (!name) return;
+
+            const event = { text: name, start: args.start, end: args.end };
+            const res = await fetch("/api/events", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(event)
+            });
+            const data = await res.json();
+            dp.events.add({ ...event, id: data.id });
+        },
+
+        onEventMoved: async (args) => {
+            await fetch(`/api/events/${args.e.id()}/move`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ start: args.newStart, end: args.newEnd })
+            });
+        },
+
+        contextMenu: new DayPilot.Menu({
+            items: [{
+                text: "Delete",
+                onClick: async (args) => {
+                    await fetch(`/api/events/${args.source.id()}`, { method: "DELETE" });
+                    dp.events.remove(args.source);
+                }
+            }]
+        })
+    });
+
+    dp.init();
+
+    function updateTitle() {
+        const months = ["January","February","March","April","May","June",
+                        "July","August","September","October","November","December"];
+        const d = dp.startDate.toDate();
+        document.getElementById("calendarTitle").textContent =
+            months[d.getMonth()] + " " + d.getFullYear();
+    }
+
+    async function loadEvents() {
+        const start = dp.visibleStart().toString();
+        const end   = dp.visibleEnd().toString();
+        const res   = await fetch(`/api/events?start=${start}&end=${end}`);
+        const data  = await res.json();
+        dp.update({ events: data });
+        updateTitle();
+    }
+
+    loadEvents();
+</script>
+}

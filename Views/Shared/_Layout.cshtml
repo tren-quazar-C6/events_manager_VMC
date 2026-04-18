@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sporting</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar navbar-expand-lg mb-4">
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+            <div class="brand-icon"><i class="fas fa-trophy"></i></div>
+            SPORT<span>ING</span>
+        </a>
+
+        <!-- Toggler mobile -->
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <i class="fas fa-bars" style="color:rgba(255,255,255,0.8)"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Event" asp-action="Gallery">
+                        <i class="fas fa-th-large"></i> Events Gallery
+                    </a>
+                </li>
+
+                <!-- Divisor -->
+                <li class="d-none d-lg-flex align-items-center">
+                    <div class="nav-divider"></div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link nav-admin-pill" asp-controller="Event" asp-action="Index">
+                        <i class="fas fa-shield-alt"></i> Admin Panel
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ── CONTENIDO ── -->
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-md-5 mb-3 mb-md-0">
+                <div class="footer-brand">SPORT<span>ING</span></div>
+                <p class="footer-tagline">Your platform for discovering and managing world-class sporting events.</p>
+                <div class="footer-social mt-2">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <p class="text-white fw-semibold mb-2" style="font-size:0.85rem;letter-spacing:1px">NAVIGATION</p>
+                <div class="footer-links d-flex flex-column gap-1">
+                    <a asp-controller="Home" asp-action="Index"><i class="fas fa-home me-2"></i>Home</a>
+                    <a asp-controller="Event" asp-action="Gallery"><i class="fas fa-th-large me-2"></i>Events Gallery</a>
+                    <a asp-controller="Event" asp-action="Index"><i class="fas fa-shield-alt me-2"></i>Admin Panel</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <p class="text-white fw-semibold mb-2" style="font-size:0.85rem;letter-spacing:1px">SPORTS</p>
+                <div class="footer-links d-flex flex-column gap-1">
+                    <a href="#">⚽ Football</a>
+                    <a href="#">🏀 Basketball</a>
+                    <a href="#">🏊 Swimming</a>
+                    <a href="#">🏃 Running</a>
+                </div>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <p class="footer-copy mb-0">&copy; 2026 Sporting — All rights reserved.</p>
+            <a asp-controller="Home" asp-action="Privacy" style="color:rgba(255,255,255,0.35);font-size:0.78rem;text-decoration:none">Privacy Policy</a>
+        </div>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

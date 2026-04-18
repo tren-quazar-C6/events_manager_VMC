@@ -1,0 +1,94 @@
+@model IEnumerable<sporting.Models.Event>
+
+<!-- Hero -->
+<div class="gallery-hero">
+    <h1><i class="fas fa-th-large me-2" style="color:var(--g3)"></i>EVENTS <span>GALLERY</span></h1>
+    <p>Discover upcoming sporting events around the world</p>
+</div>
+
+<!-- Filtros -->
+<div class="filter-bar">
+    <span class="filter-label"><i class="fas fa-filter me-1"></i>Filter:</span>
+    <button class="filter-btn active" data-sport="all">🏅 All</button>
+    <button class="filter-btn" data-sport="Football">⚽ Football</button>
+    <button class="filter-btn" data-sport="Basketball">🏀 Basketball</button>
+    <button class="filter-btn" data-sport="Swimming">🏊 Swimming</button>
+    <button class="filter-btn" data-sport="Running">🏃 Running</button>
+</div>
+
+<!-- Results count -->
+<p class="results-info">
+    Showing <strong id="visibleCount">@Model.Count()</strong> of <strong>@Model.Count()</strong> events
+</p>
+
+<!-- Grid -->
+<div class="row g-4" id="eventsGrid">
+@foreach (var ev in Model)
+{
+    var emoji = ev.SportType switch {
+        "Football"   => "⚽",
+        "Basketball" => "🏀",
+        "Swimming"   => "🏊",
+        "Running"    => "🏃",
+        _            => "🏅"
+    };
+
+    <div class="col-sm-6 col-lg-4 col-xl-3 event-item" data-sport="@ev.SportType">
+        <div class="event-card">
+            <div class="card-sport-banner sport-@ev.SportType"></div>
+            <div class="card-img-area">
+                <span>@emoji</span>
+                <div class="card-date-badge">
+                    <i class="fas fa-calendar me-1"></i>@ev.StartDate.ToString()
+                </div>
+            </div>
+            <div class="card-body-custom">
+                <div class="card-sport-badge">@ev.SportType</div>
+                <div class="card-title-custom">@ev.Name</div>
+                <div class="card-desc">@ev.Description</div>
+                <div class="card-venue">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>@ev.Venue</span>
+                </div>
+            </div>
+            <a asp-action="Show" asp-controller="Event" asp-route-id="@ev.Id" class="btn-details">
+                View Details <i class="fas fa-arrow-right ms-1"></i>
+            </a>
+        </div>
+    </div>
+}
+</div>
+
+<!-- Empty state -->
+<div class="empty-state d-none" id="emptyState">
+    <i class="fas fa-search-minus d-block"></i>
+    <p>No events found for this sport.</p>
+</div>
+
+@section Scripts {
+<script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.event-item');
+    const countEl = document.getElementById('visibleCount');
+    const emptyEl = document.getElementById('emptyState');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const sport = btn.dataset.sport;
+            let visible = 0;
+
+            items.forEach(item => {
+                const match = sport === 'all' || item.dataset.sport === sport;
+                item.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+
+            countEl.textContent = visible;
+            emptyEl.classList.toggle('d-none', visible > 0);
+        });
+    });
+</script>
+}

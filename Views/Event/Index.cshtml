@@ -1,0 +1,55 @@
+@model IEnumerable<sporting.Models.Event>
+
+<style>
+    
+</style>
+
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h2><i class="fas fa-shield-alt me-2" style="color:var(--g3)"></i>Admin Panel</h2>
+        <p>Manage all sporting events</p>
+    </div>
+    <a asp-action="Create" asp-controller="Event" class="btn-add">
+        <i class="fas fa-plus me-2"></i>Add new event
+    </a>
+</div>
+
+<div class="card table-card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-sm table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>EVENT</th>
+                        <th>SPORT</th>
+                        <th>START DATE</th>
+                        <th>VENUE</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td><span class="text-muted fw-bold">#@user.Id</span></td>
+                        <td><strong>@user.Name</strong></td>
+                        <td><span class="badge-sport">@user.SportType</span></td>
+                        <td>@user.StartDate</td>
+                        <td><i class="fas fa-map-marker-alt me-1 text-muted"></i>@user.Venue</td>
+                        <td>
+                            <form asp-action="Destroy" asp-controller="Event" asp-route-id="@user.Id" method="post">
+                                <a asp-action="Show" asp-controller="Event" asp-route-id="@user.Id"
+                                   class="btn btn-sm btn-info">Details</a>
+                                <a asp-action="Edit" asp-controller="Event" asp-route-id="@user.Id"
+                                   class="btn btn-sm btn-warning">Edit</a>
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
